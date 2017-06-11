@@ -12,3 +12,25 @@ class Solution(object):
     if len(word)>2:
       word=word[0]+str(len(word)-2)+word[-1]
     return len(self.dict[word]==0) or (len(self.dict[word])==1 and val==list(self.dic[word])[0])
+
+class ValidWordAbbr(object):
+    def __init__(self, dictionary):
+        """
+        initialize your data structure here.
+        :type dictionary: List[str]
+        """
+        self.dt = {}
+        for d in dictionary:
+            abbr = d[0] + str(len(d)) + d[-1]
+            if abbr not in self.dt.keys():
+                self.dt[abbr] = set([])
+            self.dt[abbr].add(d)
+
+    def isUnique(self, word):
+        """
+        check if a word is unique.
+        :type word: str
+        :rtype: bool
+        """
+        abbr = word[0] + str(len(word)) + word[-1]
+        return abbr not in self.dt.keys() or self.dt[abbr] == set([word])
